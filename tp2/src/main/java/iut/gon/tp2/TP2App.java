@@ -53,6 +53,30 @@ public class TP2App extends Application {
     ajouteTout.setOnAction(this::onAjouteTout);
     retireTout.setOnAction(this::onRetireTout);
     // TODO actions des deux boutons centraux
+    versDroite.setOnAction( event -> {
+    	int i = gauche.getSelectionModel().getSelectedIndex();
+    	if(i != -1) {
+	      droite.getItems().add(gauche.getItems().get(i));
+	      gauche.getItems().remove(i);
+	      gauche.getSelectionModel().clearSelection();
+    	}
+    	if(gauche.getItems().size() <= 0) {
+          ajouteTout.setDisable(true);
+    	  retireTout.setDisable(false);
+    	}
+    });
+    versGauche.setOnAction( event -> {
+    	int i = droite.getSelectionModel().getSelectedIndex();
+    	if(i != -1) {
+    	  gauche.getItems().add(droite.getItems().get(i));
+    	  droite.getItems().remove(i);
+    	  droite.getSelectionModel().clearSelection();
+    	}
+    	if(droite.getItems().size() <= 0) {
+          ajouteTout.setDisable(false);
+      	  retireTout.setDisable(true);
+      	}
+    });
   }
 
   /** Ajoute tous les éléments de gauche dans la liste de droite
@@ -61,12 +85,18 @@ public class TP2App extends Application {
     droite.getItems().addAll(gauche.getItems());
     gauche.getItems().clear();
     //TODO active/désactive les boutons
+    ajouteTout.setDisable(true);
+    retireTout.setDisable(false);
   }
 
   /** Ajoute tous les éléments de droite dans la liste de gauche
    Active le bouton "Ajouter tout" et désactive le bouton "Retirer tout" */
   private void onRetireTout(ActionEvent actionEvent) {
-    //TODO
+	  gauche.getItems().addAll(droite.getItems());
+	  droite.getItems().clear();
+	  //TODO active/désactive les boutons
+	  ajouteTout.setDisable(false);
+	  retireTout.setDisable(true);
   }
 
   /** Prépare les menus et leurs événements */
