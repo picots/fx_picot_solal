@@ -109,7 +109,7 @@
       </GridPane>
    </bottom>
    <right>
-      <VBox prefHeight="200.0" prefWidth="125.0" BorderPane.alignment="CENTER">
+      <VBox prefHeight="200.0" prefWidth="125.0" style="-fx-background-color: #9E9E9E9E;" BorderPane.alignment="CENTER">
          <children>
             <ColorPicker />
             <TilePane prefHeight="200.0" prefWidth="200.0">
