@@ -20,6 +20,10 @@ public class App extends Application {
         scene = new Scene(loadFXML("CadreGribouille"), 600, 400);
         stage.setScene(scene);
         stage.show();
+        stage.setOnCloseRequest(event -> {
+        	if(!Dialogues.confirmation())
+        		event.consume();
+        });
     }
 
     static void setRoot(String fxml) throws IOException {
@@ -30,7 +34,7 @@ public class App extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
         return fxmlLoader.load();
     }
-
+    
     public static void main(String[] args) {
         launch();
     }
