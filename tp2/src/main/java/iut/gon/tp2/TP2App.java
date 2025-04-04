@@ -91,6 +91,8 @@ public class TP2App extends Application {
    */
   private void prepareListe() {
     //TODO active le bouton "Ajouter tout"
+	gauche.getItems().addAll("Antoine Charly", "Paris Lemperriere Victor", "Poirier--Dubois Arthur");
+	ajouteTout.setDisable(false);
   }
 
   private void extraitIds(Scene scene) {
