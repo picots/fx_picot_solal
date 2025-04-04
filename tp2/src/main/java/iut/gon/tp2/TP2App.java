@@ -8,6 +8,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -78,6 +79,10 @@ public class TP2App extends Application {
 	m1.getItems().add(mi1);
 	m2.getItems().add(mi2);
 	menus.getMenus().addAll(m1, m2);
+	mi1.setOnAction(event -> Platform.exit());
+	Alert a1 = new Alert(AlertType.NONE, "Fait par Picot Solal", ButtonType.CLOSE);
+	a1.setTitle("A propos");
+	mi2.setOnAction(event -> a1.show());
   }
 
   /**
