@@ -5,7 +5,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -18,11 +21,13 @@ public class App extends Application {
     private static Scene scene;
     private static double prevX, prevY;
     private static Canvas dessin;
+    private static Pane pane;
 
     @Override
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("CadreGribouille"), 600, 400);
         dessin = (Canvas) scene.lookup("Canvas");
+        pane = (Pane) dessin.getParent();
         stage.setScene(scene);
         stage.show();
         stage.setOnCloseRequest(event -> {
@@ -37,6 +42,14 @@ public class App extends Application {
         	dessin.getGraphicsContext2D().strokeLine(prevX, prevY, event.getX(), event.getY());
         	prevX = event.getX();
         	prevY = event.getY();
+        });
+        pane.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> {
+        	Circle c = new Circle(event.getX(), event.getY(), 5);
+        	if(event.getButton() == MouseButton.SECONDARY) {
+        		pane.getChildren().add(c);
+        		event.consume();
+        		c.setMouseTransparent(true);
+        	}
         });
     }
 
