@@ -45,6 +45,10 @@ public class TP2App extends Application {
   private void prepareFermeture(Stage stage) {
     stage.setOnCloseRequest(event -> {
       //TODO confirmer ou consommer l'événement
+      Alert a = new Alert(AlertType.CONFIRMATION, "Etes-vous sur de vouloir quitter ?", ButtonType.YES, ButtonType.NO);
+      a.setTitle("Confirmation de fermeture");
+      if(a.showAndWait().get() != ButtonType.YES)
+    	  event.consume();
     });
   }
 
@@ -110,9 +114,9 @@ public class TP2App extends Application {
 	m2.getItems().add(mi2);
 	menus.getMenus().addAll(m1, m2);
 	mi1.setOnAction(event -> Platform.exit());
-	Alert a1 = new Alert(AlertType.NONE, "Fait par Picot Solal", ButtonType.CLOSE);
-	a1.setTitle("A propos");
-	mi2.setOnAction(event -> a1.show());
+	Alert a = new Alert(AlertType.NONE, "Fait par Picot Solal", ButtonType.CLOSE);
+	a.setTitle("A propos");
+	mi2.setOnAction(event -> a.show());
   }
 
   /**
