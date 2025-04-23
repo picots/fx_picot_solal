@@ -5,7 +5,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -22,21 +21,11 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("CadreGribouille"), 600, 400);
-        dessin = (Canvas) scene.lookup("Canvas");
         stage.setScene(scene);
         stage.show();
         stage.setOnCloseRequest(event -> {
         	if(!Dialogues.confirmation())
         		event.consume();
-        });
-        dessin.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> {
-        	prevX = event.getX();
-        	prevY = event.getY();
-        });
-        dessin.addEventHandler(MouseEvent.MOUSE_DRAGGED, event -> {
-        	dessin.getGraphicsContext2D().strokeLine(prevX, prevY, event.getX(), event.getY());
-        	prevX = event.getX();
-        	prevY = event.getY();
         });
     }
 

@@ -161,7 +161,7 @@
    <center>
       <Pane fx:id="pane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Canvas fx:id="canvas" height="344.0" width="478.0" />
+            <Canvas onMousePressed="#onMousePressed" onMouseDragged="#onMouseDragged" fx:id="canvas" height="344.0" width="478.0" />
          </children>
       </Pane>
    </center>
