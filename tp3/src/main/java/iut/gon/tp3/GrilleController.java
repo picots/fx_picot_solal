@@ -24,14 +24,12 @@ public class GrilleController implements Initializable{
 		grille.setStyle("-fx-background-color: seashell");
 		for(int l = 0; l < 3; l++) {
 			for(int c = 0; c < 3; c++) {
-				Label lab = new Label(modele.getCase(l, c));
+				Label lab = new Label();
+				lab.textProperty().bind(modele.getCase(l, c));
 				labels[l][c] = lab;
 				final int lg = l;
 				final int col = c;
-				lab.setOnMouseClicked(event-> {
-					lab.setText("bonjour");
-					modele.setCase(lg, col, "bonjour");
-				});
+				lab.setOnMouseClicked(event-> modele.setCase(lg, col, "bonjour"));
 				lab.setMaxSize(1000, 1000);
 				lab.setAlignment(Pos.CENTER);
 				grille.add(lab, c, l);
