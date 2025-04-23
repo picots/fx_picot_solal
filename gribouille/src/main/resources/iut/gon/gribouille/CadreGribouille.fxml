@@ -20,8 +20,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:controller="iut.gon.gribouille.Controleur" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
@@ -85,7 +84,7 @@
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Label text="X : " />
-                  <Label text="0" />
+                  <Label fx:id="abscisse" text="0" />
                </children>
                <opaqueInsets>
                   <Insets />
@@ -94,13 +93,13 @@
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
                <children>
                   <Label text="Y : " />
-                  <Label text="0" />
+                  <Label fx:id="ordonnee" text="0" />
                </children>
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2">
                <children>
                   <Label text="Epaisseur : " />
-                  <Label text="3" />
+                  <Label fx:id="epaisseur" text="3" />
                </children>
             </HBox>
             <Label text="Outil" GridPane.columnIndex="3" />
@@ -111,45 +110,45 @@
    <right>
       <VBox prefHeight="200.0" prefWidth="125.0" style="-fx-background-color: #9E9E9E9E;" BorderPane.alignment="CENTER">
          <children>
-            <ColorPicker />
+            <ColorPicker fx:id="colorPicker" />
             <TilePane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="RED" height="50.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="5.0" width="50.0">
+                  <Rectangle fx:id="rouge" arcHeight="5.0" arcWidth="5.0" fill="RED" height="50.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="5.0" width="50.0">
                      <TilePane.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </TilePane.margin>
                   </Rectangle>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="LIME" height="50.0" stroke="BLACK" strokeType="INSIDE" width="50.0">
+                  <Rectangle fx:id="vert" arcHeight="5.0" arcWidth="5.0" fill="LIME" height="50.0" stroke="BLACK" strokeType="INSIDE" width="50.0">
                      <TilePane.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </TilePane.margin>
                   </Rectangle>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="BLUE" height="50.0" stroke="BLACK" strokeType="INSIDE" width="50.0">
+                  <Rectangle fx:id="bleuFonce" arcHeight="5.0" arcWidth="5.0" fill="BLUE" height="50.0" stroke="BLACK" strokeType="INSIDE" width="50.0">
                      <TilePane.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </TilePane.margin>
                   </Rectangle>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1feaff" height="50.0" stroke="BLACK" strokeType="INSIDE" width="50.0">
+                  <Rectangle fx:id="bleuClair" arcHeight="5.0" arcWidth="5.0" fill="#1feaff" height="50.0" stroke="BLACK" strokeType="INSIDE" width="50.0">
                      <TilePane.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </TilePane.margin>
                   </Rectangle>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff1ffe" height="50.0" stroke="BLACK" strokeType="INSIDE" width="50.0">
+                  <Rectangle fx:id="rose" arcHeight="5.0" arcWidth="5.0" fill="#ff1ffe" height="50.0" stroke="BLACK" strokeType="INSIDE" width="50.0">
                      <TilePane.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </TilePane.margin>
                   </Rectangle>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f8ff1f" height="50.0" stroke="BLACK" strokeType="INSIDE" width="50.0">
+                  <Rectangle fx:id="jaune" arcHeight="5.0" arcWidth="5.0" fill="#f8ff1f" height="50.0" stroke="BLACK" strokeType="INSIDE" width="50.0">
                      <TilePane.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </TilePane.margin>
                   </Rectangle>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" height="50.0" layoutX="20.0" layoutY="200.0" stroke="BLACK" strokeType="INSIDE" width="50.0">
+                  <Rectangle fx:id="noir" arcHeight="5.0" arcWidth="5.0" height="50.0" layoutX="20.0" layoutY="200.0" stroke="BLACK" strokeType="INSIDE" width="50.0">
                      <TilePane.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </TilePane.margin>
                   </Rectangle>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="50.0" layoutX="20.0" layoutY="200.0" stroke="BLACK" strokeType="INSIDE" width="50.0">
+                  <Rectangle fx:id="blanc" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="50.0" layoutX="20.0" layoutY="200.0" stroke="BLACK" strokeType="INSIDE" width="50.0">
                      <TilePane.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </TilePane.margin>
@@ -160,9 +159,9 @@
       </VBox>
    </right>
    <center>
-      <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <Pane fx:id="pane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Canvas height="344.0" width="478.0" />
+            <Canvas fx:id="canvas" height="344.0" width="478.0" />
          </children>
       </Pane>
    </center>
