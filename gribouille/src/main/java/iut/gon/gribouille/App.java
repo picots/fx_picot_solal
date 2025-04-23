@@ -44,8 +44,8 @@ public class App extends Application {
         	prevY = event.getY();
         });
         pane.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> {
-        	Circle c = new Circle(event.getX(), event.getY(), 5);
         	if(event.getButton() == MouseButton.SECONDARY) {
+        		Circle c = new Circle(event.getX(), event.getY(), 5);
         		pane.getChildren().add(c);
         		event.consume();
         		c.setMouseTransparent(true);
