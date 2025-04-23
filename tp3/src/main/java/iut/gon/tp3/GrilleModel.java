@@ -1,7 +1,7 @@
 package iut.gon.tp3;
 
 public class GrilleModel {
-	private String[][] tabString = {{"1","2","3"},{"4","5","6"},{"7","8","9"}};
+	private String[][] tabString = {{"7","8","9"},{"4","5","6"},{"1","2","3"}};
 	
 	
 	public String getCase(int l, int c) {
