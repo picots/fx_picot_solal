@@ -21,7 +21,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-    	Dessin dessin = new Dessin();
+    	Dessin dessin = new Dessin(stage);
     	Controleur c = new Controleur(dessin);
         scene = new Scene(loadFXML("CadreGribouille", c), 600, 400);
         stage.setScene(scene);

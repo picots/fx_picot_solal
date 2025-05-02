@@ -5,6 +5,7 @@ import javafx.beans.binding.StringExpression;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
+import javafx.stage.Stage;
 
 import java.util.List;
 
@@ -29,8 +30,9 @@ public class Dessin {
   /**
    Crée un dessin vide sans nom
    */
-  public Dessin() {
+  public Dessin(Stage stage) {
     figures = FXCollections.observableArrayList();
+    nomDuFichier.bind(stage.titleProperty());
   }
 
   /**
