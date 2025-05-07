@@ -7,7 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
 
-import iut.gon.modele.Dessin;
+import iut.gon.controleurs.Controleur;
 
 /**
  * JavaFX App
@@ -18,10 +18,9 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-    	Dessin dessin = new Dessin();
-    	Controleur c = new Controleur(dessin);
+    	Controleur c = new Controleur();
         scene = new Scene(loadFXML("CadreGribouille", c), 600, 400);
-        stage.titleProperty().bind(dessin.nomDuFichierProperty());
+        stage.titleProperty().bind(c.dessin.nomDuFichierProperty());
         stage.setScene(scene);
         stage.show();
         stage.setOnCloseRequest(event -> {

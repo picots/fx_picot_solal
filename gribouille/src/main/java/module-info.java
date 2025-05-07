@@ -6,4 +6,5 @@ module iut.gon.gribouille {
 
     opens iut.gon.gribouille to javafx.fxml;
     exports iut.gon.gribouille;
+    opens iut.gon.controleurs to javafx.fxml;
 }
