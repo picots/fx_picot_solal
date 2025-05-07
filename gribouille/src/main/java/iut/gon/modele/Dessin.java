@@ -30,9 +30,8 @@ public class Dessin {
   /**
    Crée un dessin vide sans nom
    */
-  public Dessin(Stage stage) {
+  public Dessin() {
     figures = FXCollections.observableArrayList();
-    nomDuFichier.bind(stage.titleProperty());
   }
 
   /**

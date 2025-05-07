@@ -83,16 +83,8 @@ public class Controleur implements Initializable{
 			
 			canvas.heightProperty().bind(pane.heightProperty());
 			canvas.widthProperty().bind(pane.widthProperty());
-			canvas.widthProperty().addListener(observable -> {
-				for(Figure f : dessin.getFigures())
-					for(int i = 0; i < f.getPoints().size() - 1; i++)
-						canvas.getGraphicsContext2D().strokeLine(f.getPoints().get(i).getX(), f.getPoints().get(i).getY(), f.getPoints().get(i+1).getX(), f.getPoints().get(i+1).getY());
-			});
-			canvas.heightProperty().addListener(observable -> {
-				for(Figure f : dessin.getFigures())
-					for(int i = 0; i < f.getPoints().size() - 1; i++)
-						canvas.getGraphicsContext2D().strokeLine(f.getPoints().get(i).getX(), f.getPoints().get(i).getY(), f.getPoints().get(i+1).getX(), f.getPoints().get(i+1).getY());
-			});
+			canvas.widthProperty().addListener(observable -> redessiner());
+			canvas.heightProperty().addListener(observable -> redessiner());
 		}
 		
 		public void onMousePressed(MouseEvent event) {
@@ -107,4 +99,10 @@ public class Controleur implements Initializable{
         	prevY.set(event.getY());
         	dessin.getFigures().getLast().addPoint(prevX.get(), prevY.get());
 		}
+		
+		public void redessiner() {
+		for(Figure f : dessin.getFigures())
+			for(int i = 0; i < f.getPoints().size() - 1; i++)
+				canvas.getGraphicsContext2D().strokeLine(f.getPoints().get(i).getX(), f.getPoints().get(i).getY(), f.getPoints().get(i+1).getX(), f.getPoints().get(i+1).getY());
+	}
 }
