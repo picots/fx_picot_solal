@@ -19,12 +19,12 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class GrilleController implements Initializable {
+public class Grille implements Initializable {
 
   private GrilleModel modele;
   private Scores table;
 
-  public GrilleController(Scores table) {
+  public Grille(Scores table) {
     this.modele =  new GrilleModel();
     this.table = table;
   }
@@ -71,9 +71,22 @@ public class GrilleController implements Initializable {
   }
 
   private void onGagne(String joueur) {
-    //TODO demander le nom du joueur
-    //TODO modifier scores
-    //TODO appeler la table des scores
+	  if (joueur != null) {
+          TextInputDialog dialog = new TextInputDialog("Joueur");
+          dialog.setTitle("Victoire !");
+          dialog.setHeaderText("Bravo " + joueur + " !");
+          dialog.setContentText("Entrez votre nom :");
+
+          Optional<String> result = dialog.showAndWait();
+          if (result.isPresent()) {
+              String nom = result.get();
+              table.ajouteVictoire(nom);
+          }
+
+      } else {
+          table.ajouteNulle();
+      }
+      onMenuTable(null);
   }
 
   @FXML
@@ -97,5 +110,20 @@ public class GrilleController implements Initializable {
   @FXML
   public void onMenuQuitter(ActionEvent evt) {
     Platform.exit();
+  }
+  
+  public void jouerAvecTouches(KeyEvent event) {
+      switch (event.getText()) {
+      case "1" :joueCase(2,0); break;
+      case "2" :joueCase(2,1); break;
+      case "3" :joueCase(2,2); break;
+      case "4" :joueCase(1,0); break;
+      case "5" :joueCase(1,1); break;
+      case "6" :joueCase(1,2); break;
+      case "7" :joueCase(0,0); break;
+      case "8" :joueCase(0,1); break;
+      case "9" :joueCase(0,2); break;
+    }
+	  
   }
 }

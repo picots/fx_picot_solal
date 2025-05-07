@@ -18,19 +18,7 @@ public class Morpion extends Application {
     Scene scene = new Scene(fxmlLoader.load(), 800, 600);
     
     stage.setTitle("Morpion!");
-    stage.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
-      switch (event.getText()) {
-        case "1" : controller.joueCase(2,0); break;
-        case "2" : controller.joueCase(2,1); break;
-        case "3" : controller.joueCase(2,2); break;
-        case "4" : controller.joueCase(1,0); break;
-        case "5" : controller.joueCase(1,1); break;
-        case "6" : controller.joueCase(1,2); break;
-        case "7" : controller.joueCase(0,0); break;
-        case "8" : controller.joueCase(0,1); break;
-        case "9" : controller.joueCase(0,2); break;
-      }
-    });
+    stage.addEventHandler(KeyEvent.KEY_PRESSED, event -> controller.jouerAvecTouches(event));
     stage.setScene(scene);
     stage.show();
   }
