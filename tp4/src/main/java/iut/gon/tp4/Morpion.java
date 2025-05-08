@@ -18,7 +18,7 @@ public class Morpion extends Application {
     Scene scene = new Scene(fxmlLoader.load(), 800, 600);
     
     stage.setTitle("Morpion!");
-    stage.addEventHandler(KeyEvent.KEY_PRESSED, event -> controller.jouerAvecTouches(event));
+    controller.jouerAvecTouches(scene);
     stage.setScene(scene);
     stage.show();
   }

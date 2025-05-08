@@ -7,24 +7,28 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class Grille implements Initializable {
+public class GrilleController implements Initializable {
 
   private GrilleModel modele;
   private Scores table;
+  private @FXML MenusController menusController;
 
-  public Grille(Scores table) {
+  public GrilleController(Scores table) {
     this.modele =  new GrilleModel();
     this.table = table;
   }
@@ -39,6 +43,7 @@ public class Grille implements Initializable {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     grille.setStyle("-fx-background-color: seashell");
+    menusController.setParams(modele, table);
     for (int l=0; l<3; ++l)
       for (int c=0; c<3; ++c) {
         Label label =new Label();
@@ -86,30 +91,25 @@ public class Grille implements Initializable {
       } else {
           table.ajouteNulle();
       }
-      onMenuTable(null);
+      menusController.onMenuTable(null);
   }
 
-  @FXML
-  public void onMenuNouvelle(ActionEvent evt) {
-    modele.nouvellePartie();
-  }
-  @FXML
-  public void onMenuTable(ActionEvent evt) {
-    //TODO appeler la table des scores
-	try {
-		FXMLLoader fxmlLoader = new FXMLLoader(Morpion.class.getResource("table.fxml"));
-		Parent root = fxmlLoader.load();
-		TableController c = fxmlLoader.getController();
-		c.setScores(table);
-		grille.getScene().setRoot(root);
-	} catch (IOException e) {
-		System.err.println(e.getMessage());
-	}
-  }
-
-  @FXML
-  public void onMenuQuitter(ActionEvent evt) {
-    Platform.exit();
+  
+  
+  public void jouerAvecTouches(Scene scene) {
+	  scene.setOnKeyPressed(event -> {
+	  switch (event.getText()) {
+      case "1" :joueCase(2,0); break;
+      case "2" :joueCase(2,1); break;
+      case "3" :joueCase(2,2); break;
+      case "4" :joueCase(1,0); break;
+      case "5" :joueCase(1,1); break;
+      case "6" :joueCase(1,2); break;
+      case "7" :joueCase(0,0); break;
+      case "8" :joueCase(0,1); break;
+      case "9" :joueCase(0,2); break;
+	  }
+	});
   }
   
   public void jouerAvecTouches(KeyEvent event) {
