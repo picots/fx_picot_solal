@@ -15,7 +15,7 @@
                   <MenuItem mnemonicParsing="false" text="Sauvergarder" />
                   <MenuItem mnemonicParsing="false" text="Exporter" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Quitter" />
+                  <MenuItem mnemonicParsing="false" text="Quitter" onAction="#onQuitte"/>
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Outils">

@@ -3,6 +3,7 @@ package iut.gon.controleurs;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import iut.gon.gribouille.Dialogues;
 import iut.gon.modele.Dessin;
 import iut.gon.modele.Figure;
 import iut.gon.modele.Trace;
@@ -15,6 +16,7 @@ import javafx.scene.control.ColorPicker;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.util.StringConverter;
 import javafx.util.converter.NumberStringConverter;
 
 public class Controleur implements Initializable{
@@ -37,20 +39,28 @@ public class Controleur implements Initializable{
 		statutController.setParam(this);
 		paneController.setParam(this);
 		
-		statutController.abscisse.textProperty().bindBidirectional(prevX, new NumberStringConverter());
-		statutController.ordonnee.textProperty().bindBidirectional(prevY, new NumberStringConverter());
+		statutController.abscisse.textProperty().bind(prevX.asString());
+		statutController.ordonnee.textProperty().bind(prevY.asString());
+		statutController.epaisseur.textProperty().bind(epaisseur.asString());
+		statutController.couleur.textProperty().bind(couleur.asString());
 		
-		paneController.canvas.heightProperty().bind(paneController.pane.heightProperty());
-		paneController.canvas.widthProperty().bind(paneController.pane.widthProperty());
-		
-		paneController.canvas.widthProperty().addListener(observable -> redessiner());
-		paneController.canvas.heightProperty().addListener(observable -> redessiner());
 	}
 	
-	public void redessiner() {
-		for(Figure f : dessin.getFigures())
-			for(int i = 0; i < f.getPoints().size() - 1; i++)
-				paneController.canvas.getGraphicsContext2D().strokeLine(f.getPoints().get(i).getX(), f.getPoints().get(i).getY(), f.getPoints().get(i+1).getX(), f.getPoints().get(i+1).getY());
+	public void onMousePressed(MouseEvent event) {
+		prevX.set(event.getX());
+    	prevY.set(event.getY());
+    	dessin.addFigure(new Trace(epaisseur.get(), couleur.get().toString(), prevX.get(), prevY.get()));
+	}
+	
+	public void onMouseDragged(MouseEvent event) {
+		paneController.canvas.getGraphicsContext2D().strokeLine(prevX.get(), prevY.get(), event.getX(), event.getY());
+		prevX.set(event.getX());
+    	prevY.set(event.getY());
+    	dessin.getFigures().getLast().addPoint(prevX.get(), prevY.get());
+	}
+	
+	public boolean onQuitter() {
+		return Dialogues.confirmation();
 	}
 
     

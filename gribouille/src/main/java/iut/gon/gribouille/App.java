@@ -19,12 +19,12 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
     	Controleur c = new Controleur();
-        scene = new Scene(loadFXML("CadreGribouille", c), 600, 400);
+        scene = new Scene(loadFXML("cadreGribouille", c), 600, 400);
         stage.titleProperty().bind(c.dessin.nomDuFichierProperty());
         stage.setScene(scene);
         stage.show();
         stage.setOnCloseRequest(event -> {
-        	if(!Dialogues.confirmation())
+        		c.menusController.onQuitte();
         		event.consume();
         });
     }

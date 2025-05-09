@@ -41,6 +41,6 @@
                </children>
             </HBox>
             <Label text="Outil" GridPane.columnIndex="3" />
-            <Label text="Couleur" GridPane.columnIndex="4" />
+            <Label text="Couleur" GridPane.columnIndex="4" fx:id="couleur" />
          </children>
       </GridPane>

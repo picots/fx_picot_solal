@@ -10,6 +10,9 @@ public class StatutControleur {
 
     @FXML
     public Label epaisseur;
+    
+    @FXML
+    public Label couleur;
 
     @FXML
     public Label ordonnee;
