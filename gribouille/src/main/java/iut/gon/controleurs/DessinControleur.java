@@ -1,13 +1,17 @@
 package iut.gon.controleurs;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import iut.gon.modele.Figure;
 import iut.gon.modele.Trace;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
-public class DessinControleur {
+public class DessinControleur implements Initializable{
 	 @FXML
 	 public Canvas canvas;
 	 
@@ -16,16 +20,20 @@ public class DessinControleur {
 	 
 	 public Controleur controller;
 	 
+	 @Override
+	 public void initialize(URL location, ResourceBundle resources) {
+		 canvas.heightProperty().bind(pane.heightProperty());
+		 canvas.widthProperty().bind(pane.widthProperty());
+		 canvas.widthProperty().addListener(observable -> redessiner());
+		 canvas.heightProperty().addListener(observable -> redessiner());
+	 }
+	 
 	 public void setParam(Controleur c) {
 	    	controller = c;
-	    	canvas.heightProperty().bind(pane.heightProperty());
-			canvas.widthProperty().bind(pane.widthProperty());
-			canvas.widthProperty().addListener(observable -> redessiner());
-			canvas.heightProperty().addListener(observable -> redessiner());
 	}
 	
 	public void efface() {
-		canvas.getGraphicsContext2D().clearRect(0,0,0,0);	
+		canvas.getGraphicsContext2D().clearRect(0,0,canvas.getWidth(),canvas.getHeight());	
 	}
 	
 	public void trace(double x1, double y1, double x2, double y2) {
@@ -33,9 +41,11 @@ public class DessinControleur {
 	}
 	 
 	public void redessiner() {
-			for(Figure f : controller.dessin.getFigures())
-				for(int i = 0; i < f.getPoints().size() - 1; i++)
-					trace(f.getPoints().get(i).getX(), f.getPoints().get(i).getY(), f.getPoints().get(i+1).getX(), f.getPoints().get(i+1).getY());
+		controller.redessiner();
+	}
+	
+	public void onMouseMoved(MouseEvent event) {
+		controller.onMouseMoved(event);
 	}
 	
 	public void onMousePressed(MouseEvent event) {
@@ -45,5 +55,4 @@ public class DessinControleur {
 	public void onMouseDragged(MouseEvent event) {
 		controller.onMouseDragged(event);
 	}
-	
 }

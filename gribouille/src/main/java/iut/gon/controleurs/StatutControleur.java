@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
 
-public class StatutControleur {
+public class StatutControleur{
 	@FXML
     public Label abscisse;
 
@@ -16,6 +16,9 @@ public class StatutControleur {
 
     @FXML
     public Label ordonnee;
+    
+    @FXML
+    public Label outil;
     
     public Controleur controller;
     

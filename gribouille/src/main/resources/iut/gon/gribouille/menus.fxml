@@ -37,12 +37,12 @@
                         <RadioMenuItem mnemonicParsing="false" text="9" toggleGroup="$choixEpaisseur" />
                      </items>
                   </Menu>
-                  <RadioMenuItem mnemonicParsing="false" selected="true" text="Crayon">
+                  <RadioMenuItem mnemonicParsing="false" selected="true" text="Crayon" fx:id="crayon">
                      <toggleGroup>
-                        <ToggleGroup fx:id="choixCrayon" />
+                        <ToggleGroup fx:id="choixOutil" />
                      </toggleGroup>
                   </RadioMenuItem>
-                  <RadioMenuItem mnemonicParsing="false" text="Etoile" toggleGroup="$choixCrayon" />
+                  <RadioMenuItem mnemonicParsing="false" text="Etoile" fx:id="etoile" toggleGroup="$choixOutil" />
                </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Aide">

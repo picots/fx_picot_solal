@@ -5,6 +5,6 @@
 
 <Pane fx:id="pane" fx:controller="iut.gon.controleurs.DessinControleur" prefHeight="200.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
          <children>
-            <Canvas onMousePressed="#onMousePressed" onMouseDragged="#onMouseDragged" fx:id="canvas" height="344.0" width="478.0" />
+            <Canvas onMouseMoved="#onMouseMoved" onMousePressed="#onMousePressed" onMouseDragged="#onMouseDragged" fx:id="canvas" height="344.0" width="478.0" />
          </children>
 </Pane>

@@ -40,7 +40,7 @@
                   <Label fx:id="epaisseur" text="3" />
                </children>
             </HBox>
-            <Label text="Outil" GridPane.columnIndex="3" />
+            <Label text="Crayon" GridPane.columnIndex="3" fx:id="outil" />
             <Label text="Couleur" GridPane.columnIndex="4" fx:id="couleur" />
          </children>
       </GridPane>
