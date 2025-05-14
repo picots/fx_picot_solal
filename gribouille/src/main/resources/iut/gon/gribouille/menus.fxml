@@ -22,13 +22,13 @@
                <items>
                   <Menu mnemonicParsing="false" text="Epaisseur">
                      <items>
-                        <RadioMenuItem mnemonicParsing="false" text="1">
+                        <RadioMenuItem mnemonicParsing="false" text="1" selected="true">
                            <toggleGroup>
                               <ToggleGroup fx:id="choixEpaisseur" />
                            </toggleGroup>
                         </RadioMenuItem>
                         <RadioMenuItem mnemonicParsing="false" text="2" toggleGroup="$choixEpaisseur" />
-                        <RadioMenuItem mnemonicParsing="false" selected="true" text="3" toggleGroup="$choixEpaisseur" />
+                        <RadioMenuItem mnemonicParsing="false" text="3" toggleGroup="$choixEpaisseur" />
                         <RadioMenuItem mnemonicParsing="false" text="4" toggleGroup="$choixEpaisseur" />
                         <RadioMenuItem mnemonicParsing="false" text="5" toggleGroup="$choixEpaisseur" />
                         <RadioMenuItem mnemonicParsing="false" text="6" toggleGroup="$choixEpaisseur" />

@@ -41,5 +41,8 @@ public class MenusControleur implements Initializable{
 			if(crayon.isSelected())
 				controller.onCrayon();
 		});
+		choixEpaisseur.selectedToggleProperty().addListener((obs, oldE, newE) ->{
+			controller.setEpaisseur();
+		});
 	}
 }

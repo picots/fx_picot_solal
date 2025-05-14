@@ -55,4 +55,8 @@ public class DessinControleur implements Initializable{
 	public void onMouseDragged(MouseEvent event) {
 		controller.onMouseDragged(event);
 	}
+	
+	public void setEpaisseur(int epaisseur) {
+		canvas.getGraphicsContext2D().setLineWidth(epaisseur);
+	}
 }

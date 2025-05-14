@@ -14,12 +14,14 @@ public class OutilEtoile extends Outil {
 	public void onMousePressed(MouseEvent event) {
 		figure = new Etoile(controller.epaisseur.get(), controller.couleur.getName(), controller.prevX.get(), controller.prevY.get());
     	controller.dessin.addFigure(figure);
+    	controller.paneController.setEpaisseur(figure.getEpaisseur());
 	}
 
 	@Override
 	public void onMouseDragged(MouseEvent event) {
 		Etoile etoile = (Etoile)figure;
 		controller.paneController.trace(etoile.getCentre().getX(), etoile.getCentre().getY(), event.getX(), event.getY());
+		controller.paneController.setEpaisseur(figure.getEpaisseur());
 	}
 
 }
