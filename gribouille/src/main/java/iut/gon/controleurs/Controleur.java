@@ -72,14 +72,13 @@ public class Controleur implements Initializable{
 		paneController.efface();
 		for(Figure f : dessin.getFigures()) {
 			if(f instanceof Trace) {
-				for(int i = 0; i < f.getPoints().size() - 1; i++) {
-					paneController.setEpaisseur(epaisseur.get());
+				paneController.setEpaisseur(f.getEpaisseur());
+				for(int i = 0; i < f.getPoints().size() - 1; i++)
 					paneController.trace(f.getPoints().get(i).getX(), f.getPoints().get(i).getY(), f.getPoints().get(i+1).getX(), f.getPoints().get(i+1).getY());
-				}
 			}
 			if(f instanceof Etoile) {
 				Etoile e = (Etoile)f;
-				paneController.setEpaisseur(epaisseur.get());
+				paneController.setEpaisseur(e.getEpaisseur());
 				for(int i = 0; i < e.getPoints().size(); i++)
 					paneController.trace(e.getCentre().getX(), e.getCentre().getY(), e.getPoints().get(i).getX(), e.getPoints().get(i).getY());
 			}

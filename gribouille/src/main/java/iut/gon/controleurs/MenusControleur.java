@@ -42,7 +42,8 @@ public class MenusControleur implements Initializable{
 				controller.onCrayon();
 		});
 		choixEpaisseur.selectedToggleProperty().addListener((obs, oldE, newE) ->{
-			controller.setEpaisseur();
+			RadioMenuItem r = (RadioMenuItem)newE;
+			controller.setEpaisseur(Integer.parseInt(r.getText()));
 		});
 	}
 }
