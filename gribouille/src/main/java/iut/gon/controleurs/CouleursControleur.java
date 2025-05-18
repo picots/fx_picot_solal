@@ -62,10 +62,7 @@ public class CouleursControleur implements Initializable{
 			if(!(event.getTarget() instanceof Rectangle))
 				return;
 			Rectangle rectangle = (Rectangle)event.getTarget();
-			controller.setCouleur(rectangle.getFill());
-			changerEtat(prevRec.get(), 5, 1);
-			changerEtat(rectangle, 10, 5);
-			prevRec.set(rectangle);
+			controller.selectionnerCouleur(rectangle);
 		});
 	}
 }

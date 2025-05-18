@@ -28,7 +28,7 @@ public class App extends Application {
         		c.menusController.onQuitte();
         		event.consume();
         });
-        
+        stage.addEventHandler(KeyEvent.KEY_PRESSED, event -> c.onKeyPressed(event.getText()));
     }
 
     static void setRoot(String fxml, Controleur c) throws IOException {

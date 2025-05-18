@@ -115,5 +115,49 @@ public class Controleur implements Initializable{
 	public void setCouleur(Paint couleur) {
 		this.couleur.set((Color)couleur);
 	}
-	    
+	
+	public void onKeyPressed(String txt) {
+		if(Character.isDigit(txt.toCharArray()[0]) && !txt.equals("0")) //on regarde si le texte est un nombre autre que 0
+			setEpaisseur(Integer.parseInt(txt));
+		else	
+			switch(txt) {
+				case "c": //crayon
+					onCrayon();
+					break;
+				case "e": //étoile
+					onEtoile();
+					break;
+				case "b": //black
+					selectionnerCouleur(couleursController.noir);
+					break;
+				case "w": //white
+					selectionnerCouleur(couleursController.blanc);
+					break;
+				case "r": //red
+					selectionnerCouleur(couleursController.rouge);
+					break;
+				case "g": //green
+					selectionnerCouleur(couleursController.vert);
+					break;
+				case "y": //yellow
+					selectionnerCouleur(couleursController.jaune);
+					break;
+				case "p": //pink
+					selectionnerCouleur(couleursController.rose);
+					break;
+				case "d": //dark blue
+					selectionnerCouleur(couleursController.bleuFonce);
+					break;
+				case "l": //light blue
+					selectionnerCouleur(couleursController.bleuClair);
+					break;	
+		}
+	}
+	
+	public void selectionnerCouleur(Rectangle r) {
+		setCouleur(r.getFill());
+		couleursController.changerEtat(couleursController.prevRec.get(), 5, 1);
+		couleursController.changerEtat(r, 10, 5);
+		couleursController.prevRec.set(r);
+	}
 }
