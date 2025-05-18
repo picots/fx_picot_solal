@@ -14,11 +14,14 @@ import iut.gon.modele.Trace;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.WritableDoubleValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ColorPicker;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 
 
@@ -73,12 +76,14 @@ public class Controleur implements Initializable{
 		for(Figure f : dessin.getFigures()) {
 			if(f instanceof Trace) {
 				paneController.setEpaisseur(f.getEpaisseur());
+				paneController.setCouleur(Color.valueOf(f.getCouleur()));
 				for(int i = 0; i < f.getPoints().size() - 1; i++)
 					paneController.trace(f.getPoints().get(i).getX(), f.getPoints().get(i).getY(), f.getPoints().get(i+1).getX(), f.getPoints().get(i+1).getY());
 			}
 			if(f instanceof Etoile) {
 				Etoile e = (Etoile)f;
 				paneController.setEpaisseur(e.getEpaisseur());
+				paneController.setCouleur(Color.valueOf(e.getCouleur()));
 				for(int i = 0; i < e.getPoints().size(); i++)
 					paneController.trace(e.getCentre().getX(), e.getCentre().getY(), e.getPoints().get(i).getX(), e.getPoints().get(i).getY());
 			}
@@ -106,5 +111,9 @@ public class Controleur implements Initializable{
 	public void setEpaisseur(int epaisseur) {
 		this.epaisseur.set(epaisseur);
 	}
-    
+
+	public void setCouleur(Paint couleur) {
+		this.couleur.set((Color)couleur);
+	}
+	    
 }

@@ -3,6 +3,7 @@ package iut.gon.gribouille;
 import iut.gon.controleurs.Controleur;
 import iut.gon.modele.Etoile;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 
 public class OutilEtoile extends Outil {
 
@@ -12,9 +13,10 @@ public class OutilEtoile extends Outil {
 
 	@Override
 	public void onMousePressed(MouseEvent event) {
-		figure = new Etoile(controller.epaisseur.get(), controller.couleur.getName(), controller.prevX.get(), controller.prevY.get());
+		figure = new Etoile(controller.epaisseur.get(), controller.couleur.get().toString(), controller.prevX.get(), controller.prevY.get());
     	controller.dessin.addFigure(figure);
     	controller.paneController.setEpaisseur(figure.getEpaisseur());
+    	controller.paneController.setCouleur(Color.valueOf(figure.getCouleur()));
 	}
 
 	@Override
@@ -22,6 +24,7 @@ public class OutilEtoile extends Outil {
 		Etoile etoile = (Etoile)figure;
 		controller.paneController.trace(etoile.getCentre().getX(), etoile.getCentre().getY(), event.getX(), event.getY());
 		controller.paneController.setEpaisseur(figure.getEpaisseur());
+		controller.paneController.setCouleur(Color.valueOf(figure.getCouleur()));
 	}
 
 }

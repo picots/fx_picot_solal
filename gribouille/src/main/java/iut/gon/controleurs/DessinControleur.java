@@ -3,13 +3,12 @@ package iut.gon.controleurs;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import iut.gon.modele.Figure;
-import iut.gon.modele.Trace;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 
 public class DessinControleur implements Initializable{
 	 @FXML
@@ -24,8 +23,8 @@ public class DessinControleur implements Initializable{
 	 public void initialize(URL location, ResourceBundle resources) {
 		 canvas.heightProperty().bind(pane.heightProperty());
 		 canvas.widthProperty().bind(pane.widthProperty());
-		 canvas.widthProperty().addListener(observable -> redessiner());
-		 canvas.heightProperty().addListener(observable -> redessiner());
+		 canvas.widthProperty().addListener((obs, ancien, nouveau) -> redessiner());
+		 canvas.heightProperty().addListener((obs, ancien, nouveau) -> redessiner());
 	 }
 	 
 	 public void setParam(Controleur c) {
@@ -58,5 +57,9 @@ public class DessinControleur implements Initializable{
 	
 	public void setEpaisseur(int epaisseur) {
 		canvas.getGraphicsContext2D().setLineWidth(epaisseur);
+	}
+	
+	public void setCouleur(Color couleur) {
+		canvas.getGraphicsContext2D().setStroke(couleur);
 	}
 }
