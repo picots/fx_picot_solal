@@ -50,5 +50,9 @@ public class FactureController implements Initializable {
 
   public void onAjouter(ActionEvent actionEvent) {
     //TODO ajouter un produit aléatoire à la table
+	  Random r = new Random();
+	  Ligne ligne = new Ligne(r.nextInt(15), new Produit("Burger", 2.75f, 1.15f));
+	  table.getItems().add(ligne);
+	  System.out.println(table.getItems());
   }
 }
