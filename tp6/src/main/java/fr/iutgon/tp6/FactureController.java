@@ -48,7 +48,7 @@ public class FactureController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		//TODO préparer la table
 		qte.setCellValueFactory(new PropertyValueFactory<>("qte"));
-		Callback<TableColumn.CellDataFeatures<Ligne, Produit>, ObservableValue<Produit>> fabriqueProduit = 
+		Callback<TableColumn.CellDataFeatures<Ligne, Produit>, ObservableValue<Produit>> call = 
 				new Callback<TableColumn.CellDataFeatures<Ligne,Produit>, ObservableValue<Produit>>(){
 
 			@Override
@@ -58,9 +58,9 @@ public class FactureController implements Initializable {
 			}
 
 		};
-		produit.setCellValueFactory(fabriqueProduit);
+		produit.setCellValueFactory(call);
 		prixUnitaire.setCellValueFactory(param -> {
-			return param.getValue().produitProperty().getValue().prixProperty();
+			return Bindings.selectFloat(param.getValue().produitProperty(), "prix");
 		});
 		totalHT.setCellValueFactory(param ->{
 			return param.getValue().totalHTProperty();
@@ -68,6 +68,23 @@ public class FactureController implements Initializable {
 		totalTTC.setCellValueFactory(param ->{
 			return param.getValue().totalTTCProperty();
 		});
+		
+		qte.setCellFactory(cell -> new TextFieldTableCell<>(new IntegerStringConverter()));
+		produit.setCellFactory(cell -> new ChoiceBoxTableCell<Ligne, Produit>(new StringConverter<Produit>(){
+
+			@Override
+			public String toString(Produit object) {
+				// TODO Auto-generated method stub
+				return object.getNom();
+			}
+
+			@Override
+			public Produit fromString(String string) {
+				// TODO Auto-generated method stub
+				return FabriqueProduits.getProduits().get(FabriqueProduits.getProduits().indexOf(string));
+			}
+			
+		},FXCollections.observableList(FabriqueProduits.getProduits())));
 	}
 
 	public void onAjouter(ActionEvent actionEvent) {
