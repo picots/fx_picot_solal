@@ -16,6 +16,7 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.cell.ChoiceBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
@@ -28,31 +29,51 @@ import java.util.Random;
 import java.util.ResourceBundle;
 
 public class FactureController implements Initializable {
-  public TableView<Ligne> table;
-  public TableColumn<Ligne, Integer> qte;
-  public TableColumn<Ligne, Produit> produit;
-  public TableColumn<Ligne, Number> prixUnitaire;
-  public TableColumn<Ligne, Number> totalHT;
-  public TableColumn<Ligne, Number> totalTTC;
-  public TextField sommeFacture;
+	public TableView<Ligne> table;
+	public TableColumn<Ligne, Integer> qte;
+	public TableColumn<Ligne, Produit> produit;
+	public TableColumn<Ligne, Number> prixUnitaire;
+	public TableColumn<Ligne, Number> totalHT;
+	public TableColumn<Ligne, Number> totalTTC;
+	public TextField sommeFacture;
 
-  /**
+	/**
    Called to initialize a controller after its root element has been completely processed.
 
    @param location  The location used to resolve relative paths for the root object, or
    {@code null} if the location is not known.
    @param resources The resources used to localize the root object, or {@code null} if
-   */
-  @Override
-  public void initialize(URL location, ResourceBundle resources) {
-    //TODO préparer la table
-  }
+	 */
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		//TODO préparer la table
+		qte.setCellValueFactory(new PropertyValueFactory<>("qte"));
+		Callback<TableColumn.CellDataFeatures<Ligne, Produit>, ObservableValue<Produit>> fabriqueProduit = 
+				new Callback<TableColumn.CellDataFeatures<Ligne,Produit>, ObservableValue<Produit>>(){
 
-  public void onAjouter(ActionEvent actionEvent) {
-    //TODO ajouter un produit aléatoire à la table
-	  Random r = new Random();
-	  Ligne ligne = new Ligne(r.nextInt(15), new Produit("Burger", 2.75f, 1.15f));
-	  table.getItems().add(ligne);
-	  System.out.println(table.getItems());
-  }
+			@Override
+			public ObservableValue<Produit> call(CellDataFeatures<Ligne, Produit> param) {
+				// TODO Auto-generated method stub
+				return param.getValue().produitProperty();
+			}
+
+		};
+		produit.setCellValueFactory(fabriqueProduit);
+		prixUnitaire.setCellValueFactory(param -> {
+			return param.getValue().produitProperty().getValue().prixProperty();
+		});
+		totalHT.setCellValueFactory(param ->{
+			return param.getValue().totalHTProperty();
+		});
+		totalTTC.setCellValueFactory(param ->{
+			return param.getValue().totalTTCProperty();
+		});
+	}
+
+	public void onAjouter(ActionEvent actionEvent) {
+		//TODO ajouter un produit aléatoire à la table
+		Random r = new Random();
+		Ligne ligne = new Ligne(r.nextInt(15)+1, new Produit("Burger", 2.75f, 1.15f));
+		table.getItems().add(ligne);
+	}
 }
