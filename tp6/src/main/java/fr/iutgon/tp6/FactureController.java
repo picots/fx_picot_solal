@@ -6,6 +6,7 @@ import fr.iutgon.tp6.modele.Produit;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.NumberExpression;
 import javafx.beans.property.ReadOnlyIntegerWrapper;
+import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -36,6 +37,7 @@ public class FactureController implements Initializable {
 	public TableColumn<Ligne, Number> totalHT;
 	public TableColumn<Ligne, Number> totalTTC;
 	public TextField sommeFacture;
+	public NumberExpression exp = new SimpleFloatProperty(0);
 
 	/**
    Called to initialize a controller after its root element has been completely processed.
@@ -92,5 +94,7 @@ public class FactureController implements Initializable {
 		Random r = new Random();
 		Ligne ligne = new Ligne(r.nextInt(15)+1, new Produit("Burger", 2.75f, 1.15f));
 		table.getItems().add(ligne);
+		exp = Bindings.add(exp, ligne.totalTTCProperty());
+		sommeFacture.textProperty().bind(exp.asString());
 	}
 }
