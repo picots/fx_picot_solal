@@ -73,7 +73,6 @@ public class FactureController implements Initializable {
 		
 		qte.setCellFactory(cell -> new TextFieldTableCell<>(new IntegerStringConverter()));
 		produit.setCellFactory(cell -> new ChoiceBoxTableCell<Ligne, Produit>(new StringConverter<Produit>(){
-
 			@Override
 			public String toString(Produit object) {
 				// TODO Auto-generated method stub
@@ -87,6 +86,9 @@ public class FactureController implements Initializable {
 			}
 			
 		},FXCollections.observableList(FabriqueProduits.getProduits())));
+		prixUnitaire.setCellFactory(cell -> new Formatage());
+		totalHT.setCellFactory(cell -> new Formatage());
+		totalTTC.setCellFactory(cell -> new Formatage());
 	}
 
 	public void onAjouter(ActionEvent actionEvent) {
