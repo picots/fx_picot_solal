@@ -1,10 +1,19 @@
 package iut.gon.controleurs;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.ColorPicker;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 
-public class CouleursControleur {
+public class CouleursControleur implements Initializable{
+	@FXML 
+	public VBox couleurs;
+	
 	@FXML
     public ColorPicker colorPicker;
     
@@ -32,9 +41,28 @@ public class CouleursControleur {
     @FXML
     public Rectangle vert;
     
+    public SimpleObjectProperty<Rectangle> prevRec = new SimpleObjectProperty<Rectangle>();
+    
     public Controleur controller;
     
     public void setParam(Controleur c) {
     	controller = c;
     }
+
+    public void changerEtat(Rectangle r, double arc, double stroke) {
+    	r.setArcHeight(arc);
+    	r.setArcWidth(arc);
+    	r.setStrokeWidth(stroke);
+    }
+    
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		prevRec.set(noir);
+		couleurs.setOnMouseClicked(event ->{
+			if(!(event.getTarget() instanceof Rectangle))
+				return;
+			Rectangle rectangle = (Rectangle)event.getTarget();
+			controller.selectionnerCouleur(rectangle);
+		});
+	}
 }
