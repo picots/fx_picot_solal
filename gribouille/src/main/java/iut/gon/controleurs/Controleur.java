@@ -93,7 +93,9 @@ public class Controleur implements Initializable{
 	}
 	
 	public boolean onQuitter() {
-		return Dialogues.confirmation();
+		if(!dessin.getEstModifie())
+			return true;
+		return Dialogues.confirmation(this);
 	}
 	
 	public void onCrayon() {
@@ -162,20 +164,15 @@ public class Controleur implements Initializable{
 	public void sauvergarder() {
 		FileChooser fc = new FileChooser();
 		File f = fc.showSaveDialog(null);
-		if(!(f==null)) {
-			dessin.setEstModifie(false);
-			dessin.setNomDuFichier(f.getName());
-			dessin.sauveSous(f.getAbsolutePath());
-		}
+		dessin.setNomDuFichier(f.getName());
+		dessin.sauveSous(f.getAbsolutePath());
 	}
 	
 	public void charger() {
 		FileChooser fc = new FileChooser();
 		File f = fc.showOpenDialog(null);
-		if(!(f==null)) {
-			dessin.setNomDuFichier(f.getName());
-			dessin.charge(f.getAbsolutePath());
-			redessiner();
-		}
+		dessin.setNomDuFichier(f.getName());
+		dessin.charge(f.getAbsolutePath());
+		redessiner();
 	}
 }
