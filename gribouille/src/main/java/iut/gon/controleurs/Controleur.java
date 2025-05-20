@@ -163,6 +163,7 @@ public class Controleur implements Initializable{
 		FileChooser fc = new FileChooser();
 		File f = fc.showSaveDialog(null);
 		if(!(f==null)) {
+			dessin.setEstModifie(false);
 			dessin.setNomDuFichier(f.getName());
 			dessin.sauveSous(f.getAbsolutePath());
 		}
