@@ -44,6 +44,10 @@ public class MenusControleur implements Initializable{
 	 public void onSauvegarde() {
 		 controller.sauvergarder();
 	 }
+	 
+	 public void onCharge() {
+		 controller.charger();
+	 }
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {

@@ -167,4 +167,14 @@ public class Controleur implements Initializable{
 			dessin.sauveSous(f.getAbsolutePath());
 		}
 	}
+	
+	public void charger() {
+		FileChooser fc = new FileChooser();
+		File f = fc.showOpenDialog(null);
+		if(!(f==null)) {
+			dessin.setNomDuFichier(f.getName());
+			dessin.charge(f.getAbsolutePath());
+			redessiner();
+		}
+	}
 }
