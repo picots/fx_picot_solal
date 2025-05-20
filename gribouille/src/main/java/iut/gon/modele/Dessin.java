@@ -32,7 +32,7 @@ public class Dessin {
    */
   private List<Figure> figures;
   
-  private SimpleObjectProperty<File> fichier;
+  private SimpleObjectProperty<File> fichier = new SimpleObjectProperty<File>();
 
   /**
    Crée un dessin vide sans nom

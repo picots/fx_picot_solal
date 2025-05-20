@@ -12,7 +12,7 @@
           <Menu mnemonicParsing="false" text="Dessin">
             <items>
               <MenuItem mnemonicParsing="false" text="Charger" />
-                  <MenuItem mnemonicParsing="false" text="Sauvergarder" />
+                  <MenuItem mnemonicParsing="false" text="Sauvergarder" onAction="#onSauvegarde"/>
                   <MenuItem mnemonicParsing="false" text="Exporter" />
                   <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem mnemonicParsing="false" text="Quitter" onAction="#onQuitte"/>
@@ -37,12 +37,12 @@
                         <RadioMenuItem mnemonicParsing="false" text="9" toggleGroup="$choixEpaisseur" />
                      </items>
                   </Menu>
-                  <RadioMenuItem mnemonicParsing="false" selected="true" text="Crayon" fx:id="crayon">
+                  <RadioMenuItem mnemonicParsing="false" selected="true" text="Crayon" fx:id="crayon" onAction="#onCrayon">
                      <toggleGroup>
                         <ToggleGroup fx:id="choixOutil" />
                      </toggleGroup>
                   </RadioMenuItem>
-                  <RadioMenuItem mnemonicParsing="false" text="Etoile" fx:id="etoile" toggleGroup="$choixOutil" />
+                  <RadioMenuItem mnemonicParsing="false" text="Etoile" fx:id="etoile" toggleGroup="$choixOutil" onAction="#onEtoile"/>
                </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Aide">

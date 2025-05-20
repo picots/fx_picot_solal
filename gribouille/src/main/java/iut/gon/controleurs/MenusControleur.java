@@ -32,15 +32,21 @@ public class MenusControleur implements Initializable{
 		 if(controller.onQuitter())
 			 Platform.exit();
 	 }
+	 
+	 public void onCrayon() {
+		 controller.onCrayon();
+	 }
+	 
+	 public void onEtoile() {
+		 controller.onEtoile();
+	 }
+	 
+	 public void onSauvegarde() {
+		 controller.sauvergarder();
+	 }
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		choixOutil.selectedToggleProperty().addListener((obs, ancien, nouveau) ->{
-			if(etoile.isSelected())
-				controller.onEtoile();
-			if(crayon.isSelected())
-				controller.onCrayon();
-		});
 		choixEpaisseur.selectedToggleProperty().addListener((obs, ancien, nouveau) ->{
 			RadioMenuItem r = (RadioMenuItem)nouveau;
 			controller.setEpaisseur(Integer.parseInt(r.getText()));

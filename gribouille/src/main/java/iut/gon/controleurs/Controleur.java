@@ -1,5 +1,6 @@
 package iut.gon.controleurs;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -23,6 +24,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.FileChooser;
 
 
 public class Controleur implements Initializable{
@@ -97,15 +99,11 @@ public class Controleur implements Initializable{
 	public void onCrayon() {
 		outil = new OutilCrayon(this);
 		statutController.outil.setText("Crayon");
-		menusController.etoile.setSelected(false);
-		menusController.crayon.setSelected(true);
 	}
 	
 	public void onEtoile() {
 		outil = new OutilEtoile(this);
 		statutController.outil.setText("Etoile");
-		menusController.etoile.setSelected(true);
-		menusController.crayon.setSelected(false);
 	}
 
 	public void setEpaisseur(int epaisseur) {
@@ -159,5 +157,14 @@ public class Controleur implements Initializable{
 		couleursController.changerEtat(couleursController.prevRec.get(), 5, 1);
 		couleursController.changerEtat(r, 10, 5);
 		couleursController.prevRec.set(r);
+	}
+	
+	public void sauvergarder() {
+		FileChooser fc = new FileChooser();
+		File f = fc.showSaveDialog(null);
+		if(!(f==null)) {
+			dessin.setNomDuFichier(f.getName());
+			dessin.sauveSous(f.getAbsolutePath());
+		}
 	}
 }
