@@ -1,10 +1,8 @@
 package iut.gon.gribouille;
 
-import java.io.FileNotFoundException;
 import java.util.Optional;
 
 import iut.gon.controleurs.Controleur;
-import iut.gon.modele.Dessin;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
@@ -24,7 +22,7 @@ public class Dialogues {
 			try {
 				c.sauvergarder();
 				return true;
-			} catch (Exception e) {
+			} catch (NullPointerException e) {
 				return false;
 			}
 		}

@@ -48,7 +48,13 @@ public class CouleursControleur implements Initializable{
     public void setParam(Controleur c) {
     	controller = c;
     }
-
+    
+    public void getCouleurDuColorPicker() {
+    	controller.setCouleur(colorPicker.getValue());
+    	controller.paneController.setCouleur(colorPicker.getValue());
+    	changerEtat(prevRec.get(), 5, 1);
+    }
+    
     public void changerEtat(Rectangle r, double arc, double stroke) {
     	r.setArcHeight(arc);
     	r.setArcWidth(arc);

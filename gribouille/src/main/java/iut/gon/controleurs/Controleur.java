@@ -1,6 +1,8 @@
 package iut.gon.controleurs;
 
 import java.io.File;
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -15,16 +17,19 @@ import iut.gon.modele.Trace;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.value.WritableDoubleValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ColorPicker;
-import javafx.scene.input.KeyEvent;
+import javafx.scene.SnapshotParameters;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.embed.swing.SwingFXUtils;
 
 
 public class Controleur implements Initializable{
@@ -117,7 +122,7 @@ public class Controleur implements Initializable{
 	}
 	
 	public void onKeyPressed(String txt) {
-		if(Character.isDigit(txt.toCharArray()[0]) && !txt.equals("0")) //on regarde si le texte est un nombre autre que 0
+		if(txt.matches("[1-9]"))//on regarde si le texte est un nombre autre que 0
 			setEpaisseur(Integer.parseInt(txt));
 		else	
 			switch(txt) {
@@ -164,15 +169,44 @@ public class Controleur implements Initializable{
 	public void sauvergarder() {
 		FileChooser fc = new FileChooser();
 		File f = fc.showSaveDialog(null);
-		dessin.setNomDuFichier(f.getName());
-		dessin.sauveSous(f.getAbsolutePath());
+		try {	
+			dessin.setNomDuFichier(f.getName());
+			dessin.sauveSous(f.getAbsolutePath());
+		} catch(NullPointerException e) {
+			throw new NullPointerException();
+		}
 	}
 	
 	public void charger() {
 		FileChooser fc = new FileChooser();
 		File f = fc.showOpenDialog(null);
-		dessin.setNomDuFichier(f.getName());
-		dessin.charge(f.getAbsolutePath());
+		try {	
+			dessin.setNomDuFichier(f.getName());
+			dessin.charge(f.getAbsolutePath());
+			redessiner();
+		} catch(NullPointerException e) {
+			throw new NullPointerException();
+		}
+	}
+	
+	public void exporter() {
+		FileChooser fc = new FileChooser();
+		FileChooser.ExtensionFilter format = new FileChooser.ExtensionFilter("Images", "*.png");
+		fc.setSelectedExtensionFilter(format);
+		File f = fc.showSaveDialog(null);
+		WritableImage image = paneController.canvas.snapshot(new SnapshotParameters(), null);
+		try {
+			javax.imageio.ImageIO.write(SwingFXUtils.fromFXImage(image,null), "png", f);
+		} catch (Exception e) {
+			Alert a = new Alert(AlertType.ERROR, "Une erreur s'est produite !");
+			a.show();
+		}
+	}
+	
+	public void effaceFigure() {
+		paneController.efface();
+		dessin.getFigures().removeLast();
 		redessiner();
 	}
+
 }

@@ -11,12 +11,18 @@
         <menus>
           <Menu mnemonicParsing="false" text="Dessin">
             <items>
-              <MenuItem mnemonicParsing="false" text="Charger" onAction="#onCharge"/>
-                  <MenuItem mnemonicParsing="false" text="Sauvergarder" onAction="#onSauvegarde"/>
-                  <MenuItem mnemonicParsing="false" text="Exporter" />
-                  <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Quitter" onAction="#onQuitte"/>
+            	<MenuItem mnemonicParsing="false" text="Charger" onAction="#onCharge"/>
+            	<MenuItem mnemonicParsing="false" text="Sauvergarder" onAction="#onSauvegarde"/>
+            	<MenuItem mnemonicParsing="false" text="Exporter" onAction="#onExporte"/>
+            	<SeparatorMenuItem mnemonicParsing="false" />
+            	<MenuItem mnemonicParsing="false" text="Quitter" onAction="#onQuitte"/>
             </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edition">
+          	<items>
+          		<MenuItem mnemonicParsing="false" text="Tout effacer" onAction="#onEffaceTout"/>
+          		<MenuItem mnemonicParsing="false" text="Effacer la dernière figure" onAction="#onEffaceFigure"/>
+          	</items>
           </Menu>
           <Menu mnemonicParsing="false" text="Outils">
                <items>
