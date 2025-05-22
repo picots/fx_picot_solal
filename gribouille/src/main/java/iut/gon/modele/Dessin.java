@@ -1,12 +1,12 @@
 package iut.gon.modele;
 
 import javafx.beans.binding.BooleanExpression;
+import javafx.beans.binding.ObjectExpression;
 import javafx.beans.binding.StringExpression;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
-import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -33,6 +33,8 @@ public class Dessin {
 	private List<Figure> figures;
 
 	private SimpleObjectProperty<File> fichier = new SimpleObjectProperty<File>();
+	
+	private SimpleBooleanProperty estVide = new SimpleBooleanProperty(true);
 
 	/**
    Crée un dessin vide sans nom
@@ -61,6 +63,7 @@ public class Dessin {
 	public void addFigure(Figure figure) {
 		figures.add(figure);
 		estModifie.set(true);
+		estVide.set(false);
 	}
 
 	/**
@@ -92,7 +95,7 @@ public class Dessin {
 	}
 
 	/**
-   Retourne le nom du fichier
+   Modifie le nom du fichier
 	 */
 	public void setNomDuFichier(String nomDuFichier) {
 		this.nomDuFichier.set(nomDuFichier);
@@ -104,7 +107,55 @@ public class Dessin {
 	public StringExpression nomDuFichierProperty() {
 		return nomDuFichier;
 	}
-
+	
+	/**
+	 Retourne le fichier où on sauvergarde le dessin
+	*/
+	
+	public File getFichier() {
+		return fichier.get();
+	}
+	
+	/**
+	 Modifie le fichier de sauvergarde
+	 */
+	
+	public void setFichier(File f) {
+		fichier.set(f);
+	}
+	
+	/**
+	 Le fichier de sauvergarde
+	 */
+	
+	public ObjectExpression<File> fichierProperty(){
+		return fichier;
+	}
+	
+	/**
+	 Teste si le dessin est vide
+	 */
+	
+	public boolean getEstVide() {
+		return estVide.get();
+	}
+	
+	/**
+	 Modifie l'état du dessin
+	 */
+	public void setEstVide(boolean valeur) {
+		estVide.set(valeur);
+	}
+	
+	/**
+	 Teste si le dessin est vide
+	 */
+	
+	public BooleanExpression estVideProperty() {
+		return estVide;
+	}
+	
+	
 	/** Sauvegarde le dessin dans le fichier spécifié.
 	 *  Change le nom du dessin si succès.
 	 */
@@ -145,9 +196,4 @@ public class Dessin {
 			throw new IllegalArgumentException("Ce fichier est illisible !");
 		}
 	}
-
-	public File getFichier() {
-		return fichier.get();
-	}
-
 } // public class Dessin

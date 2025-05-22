@@ -58,6 +58,11 @@ public class Controleur implements Initializable{
 		statutController.epaisseur.textProperty().bind(epaisseur.asString());
 		statutController.couleur.textProperty().bind(couleur.asString());
 		
+		dessin.estVideProperty().addListener((obs, ancien, nouveau) ->{
+			menusController.toutSup.setDisable(nouveau);
+			menusController.figSup.setDisable(nouveau);
+		});
+		
 	}
     
     public void onMouseMoved(MouseEvent event) {
@@ -203,9 +208,16 @@ public class Controleur implements Initializable{
 		}
 	}
 	
+	public void effaceTout() {
+		paneController.efface();
+		dessin.setEstVide(true);
+	}
+	
 	public void effaceFigure() {
 		paneController.efface();
 		dessin.getFigures().removeLast();
+		if(dessin.getFigures().isEmpty())
+			dessin.setEstVide(true);
 		redessiner();
 	}
 

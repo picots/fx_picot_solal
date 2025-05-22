@@ -7,6 +7,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.ToggleGroup;
 
@@ -16,7 +17,13 @@ public class MenusControleur implements Initializable{
 	
 	@FXML
 	 public ToggleGroup choixOutil;
-	 
+	
+	@FXML
+	public MenuItem toutSup;
+	
+	@FXML
+	public MenuItem figSup;
+	
 	 @FXML
 	 public RadioMenuItem crayon;
 	 
@@ -62,7 +69,7 @@ public class MenusControleur implements Initializable{
 	 }
 	 
 	 public void onEffaceTout() {
-		 controller.paneController.efface();
+		 controller.effaceTout();
 	 }
 
 	@Override
