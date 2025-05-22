@@ -1,5 +1,8 @@
 package iut.gon.controleurs;
 
+import java.io.File;
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -17,12 +20,17 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.WritableDoubleValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ColorPicker;
-import javafx.scene.input.KeyEvent;
+import javafx.scene.SnapshotParameters;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.embed.swing.SwingFXUtils;
 
 
 public class Controleur implements Initializable{
@@ -50,6 +58,11 @@ public class Controleur implements Initializable{
 		statutController.ordonnee.textProperty().bind(prevY.asString());
 		statutController.epaisseur.textProperty().bind(epaisseur.asString());
 		statutController.couleur.textProperty().bind(couleur.asString());
+		
+		dessin.estVideProperty().addListener((obs, ancien, nouveau) ->{
+			menusController.toutSup.setDisable(nouveau);
+			menusController.figSup.setDisable(nouveau);
+		});
 		
 	}
     
@@ -91,21 +104,19 @@ public class Controleur implements Initializable{
 	}
 	
 	public boolean onQuitter() {
-		return Dialogues.confirmation();
+		if(!dessin.getEstModifie())
+			return true;
+		return Dialogues.confirmation(this);
 	}
 	
 	public void onCrayon() {
 		outil = new OutilCrayon(this);
 		statutController.outil.setText("Crayon");
-		menusController.etoile.setSelected(false);
-		menusController.crayon.setSelected(true);
 	}
 	
 	public void onEtoile() {
 		outil = new OutilEtoile(this);
 		statutController.outil.setText("Etoile");
-		menusController.etoile.setSelected(true);
-		menusController.crayon.setSelected(false);
 	}
 
 	public void setEpaisseur(int epaisseur) {
@@ -117,7 +128,7 @@ public class Controleur implements Initializable{
 	}
 	
 	public void onKeyPressed(String txt) {
-		if(Character.isDigit(txt.toCharArray()[0]) && !txt.equals("0")) //on regarde si le texte est un nombre autre que 0
+		if(txt.matches("[1-9]"))//on regarde si le texte est un nombre autre que 0
 			setEpaisseur(Integer.parseInt(txt));
 		else	
 			switch(txt) {
@@ -159,5 +170,55 @@ public class Controleur implements Initializable{
 		couleursController.changerEtat(couleursController.prevRec.get(), 5, 1);
 		couleursController.changerEtat(r, 10, 5);
 		couleursController.prevRec.set(r);
+	}
+	
+	public void sauvergarder() {
+		FileChooser fc = new FileChooser();
+		File f = fc.showSaveDialog(null);
+		try {	
+			dessin.setNomDuFichier(f.getName());
+			dessin.sauveSous(f.getAbsolutePath());
+		} catch(NullPointerException e) {
+			throw new NullPointerException();
+		}
+	}
+	
+	public void charger() {
+		FileChooser fc = new FileChooser();
+		File f = fc.showOpenDialog(null);
+		try {	
+			dessin.setNomDuFichier(f.getName());
+			dessin.charge(f.getAbsolutePath());
+			redessiner();
+		} catch(NullPointerException e) {
+			throw new NullPointerException();
+		}
+	}
+	
+	public void exporter() {
+		FileChooser fc = new FileChooser();
+		FileChooser.ExtensionFilter format = new FileChooser.ExtensionFilter("Images", "*.png");
+		fc.setSelectedExtensionFilter(format);
+		File f = fc.showSaveDialog(null);
+		WritableImage image = paneController.canvas.snapshot(new SnapshotParameters(), null);
+		try {
+			javax.imageio.ImageIO.write(SwingFXUtils.fromFXImage(image,null), "png", f);
+		} catch (Exception e) {
+			Alert a = new Alert(AlertType.ERROR, "Une erreur s'est produite !");
+			a.show();
+		}
+	}
+	
+	public void effaceTout() {
+		paneController.efface();
+		dessin.setEstVide(true);
+	}
+	
+	public void effaceFigure() {
+		paneController.efface();
+		dessin.getFigures().removeLast();
+		if(dessin.getFigures().isEmpty())
+			dessin.setEstVide(true);
+		redessiner();
 	}
 }

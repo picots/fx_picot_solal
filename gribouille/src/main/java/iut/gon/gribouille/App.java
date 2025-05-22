@@ -1,6 +1,7 @@
 package iut.gon.gribouille;
 
 import javafx.application.Application;
+import javafx.beans.binding.Bindings;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -21,7 +22,7 @@ public class App extends Application {
     public void start(Stage stage) throws IOException {
     	Controleur c = new Controleur();
         scene = new Scene(loadFXML("cadreGribouille", c), 600, 400);
-        stage.titleProperty().bind(c.dessin.nomDuFichierProperty());
+        stage.titleProperty().bind(Bindings.concat(Bindings.when(c.dessin.estModifieProperty()).then("*").otherwise(""), c.dessin.nomDuFichierProperty()));
         stage.setScene(scene);
         stage.show();
         stage.setOnCloseRequest(event -> {

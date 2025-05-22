@@ -6,13 +6,24 @@ import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.ToggleGroup;
 
 public class MenusControleur implements Initializable{
-	 @FXML
+	@FXML
+	public MenuBar menus;
+	
+	@FXML
 	 public ToggleGroup choixOutil;
-	 
+	
+	@FXML
+	public MenuItem toutSup;
+	
+	@FXML
+	public MenuItem figSup;
+	
 	 @FXML
 	 public RadioMenuItem crayon;
 	 
@@ -32,14 +43,40 @@ public class MenusControleur implements Initializable{
 		 if(controller.onQuitter())
 			 Platform.exit();
 	 }
+	 
+	 public void onCrayon() {
+		 controller.onCrayon();
+	 }
+	 
+	 public void onEtoile() {
+		 controller.onEtoile();
+	 }
+	 
+	 public void onSauvegarde() {
+		 controller.sauvergarder();
+	 }
+	 
+	 public void onCharge() {
+		 controller.charger();
+	 }
+	 
+	 public void onExporte() {
+		 controller.exporter();
+	 }
+	 
+	 public void onEffaceFigure() {
+		 controller.effaceFigure();
+	 }
+	 
+	 public void onEffaceTout() {
+		 controller.effaceTout();
+	 }
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		choixOutil.selectedToggleProperty().addListener((obs, ancien, nouveau) ->{
-			if(etoile.isSelected())
-				controller.onEtoile();
-			if(crayon.isSelected())
-				controller.onCrayon();
+		choixEpaisseur.selectedToggleProperty().addListener((obs, ancien, nouveau) ->{
+			RadioMenuItem r = (RadioMenuItem)nouveau;
+			controller.setEpaisseur(Integer.parseInt(r.getText()));
 		});
 		choixEpaisseur.selectedToggleProperty().addListener((obs, ancien, nouveau) ->{
 			RadioMenuItem r = (RadioMenuItem)nouveau;

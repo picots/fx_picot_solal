@@ -8,7 +8,7 @@
 
 <VBox fx:id="couleurs" fx:controller="iut.gon.controleurs.CouleursControleur" prefHeight="200.0" prefWidth="125.0" style="-fx-background-color: #9E9E9E9E;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
          <children>
-            <ColorPicker fx:id="colorPicker" />
+            <ColorPicker fx:id="colorPicker" onAction="#getCouleurDuColorPicker"/>
             <TilePane prefHeight="200.0" prefWidth="200.0">
                <children>
                   <Rectangle fx:id="rouge" arcHeight="5.0" arcWidth="5.0" fill="RED" height="50.0" stroke="BLACK" strokeType="INSIDE" width="50.0">
