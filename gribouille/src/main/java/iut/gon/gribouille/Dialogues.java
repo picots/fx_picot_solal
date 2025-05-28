@@ -22,7 +22,7 @@ public class Dialogues {
 			try {
 				c.sauvergarder();
 				return true;
-			} catch (NullPointerException e) {
+			} catch (Exception e) {
 				return false;
 			}
 		}

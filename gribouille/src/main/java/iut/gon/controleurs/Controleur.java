@@ -128,15 +128,20 @@ public class Controleur implements Initializable{
 	}
 	
 	public void onKeyPressed(String txt) {
-		if(txt.matches("[1-9]"))//on regarde si le texte est un nombre autre que 0
-			setEpaisseur(Integer.parseInt(txt));
+		if(txt.matches("[1-9]")){//on regarde si le texte est un nombre autre que 0
+			int newEpaisseur = Integer.parseInt(txt);
+			setEpaisseur(newEpaisseur);
+			menusController.choixEpaisseur.getToggles().get(newEpaisseur - 1).setSelected(true);
+		}
 		else	
 			switch(txt) {
 				case "c": //crayon
 					onCrayon();
+					menusController.crayon.setSelected(true);
 					break;
 				case "e": //étoile
 					onEtoile();
+					menusController.etoile.setSelected(true);
 					break;
 				case "b": //black
 					selectionnerCouleur(couleursController.noir);
@@ -178,8 +183,8 @@ public class Controleur implements Initializable{
 		try {	
 			dessin.setNomDuFichier(f.getName());
 			dessin.sauveSous(f.getAbsolutePath());
-		} catch(NullPointerException e) {
-			throw new NullPointerException();
+		} catch(Exception e) {
+			throw e;
 		}
 	}
 	
@@ -190,8 +195,8 @@ public class Controleur implements Initializable{
 			dessin.setNomDuFichier(f.getName());
 			dessin.charge(f.getAbsolutePath());
 			redessiner();
-		} catch(NullPointerException e) {
-			throw new NullPointerException();
+		} catch(Exception e) {
+			throw e;
 		}
 	}
 	
