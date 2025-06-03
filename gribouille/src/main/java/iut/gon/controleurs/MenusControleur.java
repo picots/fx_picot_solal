@@ -90,9 +90,5 @@ public class MenusControleur implements Initializable {
 			RadioMenuItem r = (RadioMenuItem) nouveau;
 			controller.setEpaisseur(Integer.parseInt(r.getText()));
 		});
-		choixEpaisseur.selectedToggleProperty().addListener((obs, ancien, nouveau) -> {
-			RadioMenuItem r = (RadioMenuItem) nouveau;
-			controller.setEpaisseur(Integer.parseInt(r.getText()));
-		});
 	}
 }
